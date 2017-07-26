@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <display-name>cip</display-name>
+  <welcome-file-list>
+    <welcome-file>/WEB-INF/content/welcome.jsp</welcome-file>
+  </welcome-file-list>
+  <filter>
+    <filter-name>struts2</filter-name>
+    <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>struts2</filter-name>
+    <url-pattern>*.action</url-pattern>
+  </filter-mapping>
+  
+  	<!-- PageOffice Begin -->
+	<servlet>
+		<servlet-name>poserver</servlet-name>
+		<servlet-class>com.zhuozhengsoft.pageoffice.poserver.Server</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>poserver</servlet-name>
+		<url-pattern>/poserver.zz</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>poserver</servlet-name>
+		<url-pattern>/poserver.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>poserver</servlet-name>
+		<url-pattern>/pageoffice.cab</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>poserver</servlet-name>
+		<url-pattern>/popdf.cab</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>poserver</servlet-name>
+		<url-pattern>/sealsetup.exe</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>poserver</servlet-name>
+		<url-pattern>/posetup.exe</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>adminseal</servlet-name>
+		<servlet-class>com.zhuozhengsoft.pageoffice.poserver.AdminSeal</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>adminseal</servlet-name>
+		<url-pattern>/adminseal.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>adminseal</servlet-name>
+		<url-pattern>/loginseal.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>adminseal</servlet-name>
+		<url-pattern>/sealimage.do</url-pattern>
+	</servlet-mapping>
+	<mime-mapping>
+		<extension>mht</extension>
+		<mime-type>message/rfc822</mime-type>
+	</mime-mapping>
+	<context-param>
+		<param-name>adminseal-password</param-name>
+		<param-value>111111</param-value>
+	</context-param>
+</web-app>
