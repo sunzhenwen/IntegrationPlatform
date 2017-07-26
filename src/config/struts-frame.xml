@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+    <package name="frame" namespace="/" extends="default">
+    	
+    	<!-- 框架页面加载 -->
+    	<action name="frameAction_*" class="com.tj.jst.indexFrame.action.FrameAction" method="{1}">
+            <result name="left">/WEB-INF/content/inner/left.jsp</result>
+            <result name="right">/WEB-INF/content/inner/right.jsp</result>
+            <result name="top">/WEB-INF/content/inner/top.jsp</result>
+            
+        </action>
+        
+    </package>
+
+</struts>

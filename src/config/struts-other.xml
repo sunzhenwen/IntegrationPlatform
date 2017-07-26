@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+    <package name="otherCorp" namespace="/" extends="json-default,default">
+    	
+    	<!-- 外省企业备案 -->
+    	<action name="otherProvinceAction_*" class="com.tj.jst.outside.corpinto.otherProvince.corp.action.OtherProvinceAction" method="{1}">
+            <result name="otherProvinceLogin">/WEB-INF/content/outside/corpinto/otherProvince/corp/otherProvinceLogin.jsp</result>
+            <result name="otherProvinceCheck">/WEB-INF/content/outside/corpinto/otherProvince/corp/otherProvinceCheck.jsp</result>
+        	<result name="businessPage3">/WEB-INF/content/outside/business/business3.jsp</result>
+        	<result name="loginCheck">/WEB-INF/content/login.jsp</result>
+        </action>
+        
+    </package>
+    
+    <!-- 人员管理 -->
+    <package name="otherStaff" namespace="/" extends="json-default,default">
+    	
+    	<!-- 外省注册建造师 -->
+		<action name="otherConstructorAction_*" class="com.tj.jst.outside.corpinto.otherProvince.constructor.action.OtherConstructorAction" method="{1}">
+            <result name="constructorSuccess">/WEB-INF/content/outside/corpinto/otherProvince/staffmanage/otherConstructor/constructorList.jsp</result>
+			<result name="goBusiness" type="redirect">otherProvinceAction_loginCheck.action</result>
+			<result name="detailed">/WEB-INF/content/outside/corpinto/otherProvince/staffmanage/otherConstructor/constructorDetailed.jsp</result>
+			<result name="addPage">/WEB-INF/content/outside/corpinto/otherProvince/staffmanage/otherConstructor/constructorAdd.jsp</result>
+			<result name="modifyPage">/WEB-INF/content/outside/corpinto/otherProvince/staffmanage/otherConstructor/constructorModify.jsp</result>
+            <result name="queryPage" type="redirect">otherConstructorAction_queryPage.action</result>
+			<result name="loadPage">/WEB-INF/content/outside/corpinto/otherProvince/staffmanage/otherConstructor/loadPage.jsp</result>
+			<result name="success" type="json">
+			    <param name="root">result</param>
+			</result>
+		</action>
+
+		<!-- 外省岗位人员 -->
+		<action name="otherPositionsAction_*" class="com.tj.jst.outside.corpinto.otherProvince.positions.action.OtherPositionsAction" method="{1}">
+            <result name="querySuccess">/WEB-INF/content/outside/corpinto/otherProvince/staffmanage/otherPositions/otherPositionsList.jsp</result>
+            <result name="addSuccess">/WEB-INF/content/outside/corpinto/otherProvince/staffmanage/otherPositions/otherPositionsAdd.jsp</result>
+            <result name="modifySuccess">/WEB-INF/content/outside/corpinto/otherProvince/staffmanage/otherPositions/otherPositionsModify.jsp</result>
+			<result name="goBusiness" type="redirect">otherProvinceAction_loginCheck.action</result>
+			<result name="queryPage" type="redirect">otherPositionsAction_queryPage.action?message=${message}</result>
+			<result name="success" type="json">
+			    <param name="root">result</param>
+			</result>
+		</action>
+
+		<!-- 外省岗位人员(用于登陆系统后查询) -->
+		<action name="queryOtherPositionsAction_*" class="com.tj.jst.outside.staffmanage.positions.action.QueryOtherPositionsAction" method="{1}">
+            <result name="querySuccess">/WEB-INF/content/outside/staffmanage/positions/otherPositionsList.jsp</result>
+          	<result name="goBusiness" type="redirect">loginAction_businessPage.action</result>
+			<result name="queryPage" type="redirect">queryOtherPositionsAction_queryPage.action?message=${message}</result>
+		</action>
+
+		<!-- 外省注册技术工种 -->
+        <action name="otherSkilledworkerAction_*" class="com.tj.jst.outside.corpinto.otherProvince.skilledworker.action.OtherSkilledworkerAction" method="{1}">
+            <result name="skillworkerSuccess">/WEB-INF/content/outside/corpinto/otherProvince/staffmanage/otherSkilledworker/skilledworkerList.jsp</result>
+            <result name="addPage">/WEB-INF/content/outside/corpinto/otherProvince/staffmanage/otherSkilledworker/skilledworkerAdd.jsp</result>
+            <result name="modifyPage">/WEB-INF/content/outside/corpinto/otherProvince/staffmanage/otherSkilledworker/skilledworkerModify.jsp</result>
+            <result name="goBusiness" type="redirect">otherProvinceAction_loginCheck.action</result>
+            <result name="queryPage" type="redirect">otherSkilledworkerAction_queryPage.action</result>
+        </action>
+
+		<!-- 外省职称人员 -->
+		<action name="otherTitleAction_*" class="com.tj.jst.outside.corpinto.otherProvince.title.action.OtherTitleAction" method="{1}">
+            <result name="titleSuccess">/WEB-INF/content/outside/corpinto/otherProvince/staffmanage/otherTitle/titleList.jsp</result>
+            <result name="addPage">/WEB-INF/content/outside/corpinto/otherProvince/staffmanage/otherTitle/titleAdd.jsp</result>
+            <result name="modifyPage">/WEB-INF/content/outside/corpinto/otherProvince/staffmanage/otherTitle/titleModify.jsp</result>
+            <result name="goBusiness" type="redirect">otherProvinceAction_loginCheck.action</result>
+            <result name="queryPage" type="redirect">otherTitleAction_queryPage.action</result>
+        </action>
+
+		<!-- 外省三类人员 -->
+		<action name="threeTypePersonAction_*" class="com.tj.jst.outside.corpinto.otherProvince.threeTypePerson.action.ThreeTypePersonAction" method="{1}">
+            <result name="threeTypePersonSuccess">/WEB-INF/content/outside/corpinto/otherProvince/staffmanage/threeTypePerson/threeTypePersonList.jsp</result>
+            <result name="addPage">/WEB-INF/content/outside/corpinto/otherProvince/staffmanage/threeTypePerson/threeTypePersonAdd.jsp</result>
+            <result name="modifyPage">/WEB-INF/content/outside/corpinto/otherProvince/staffmanage/threeTypePerson/threeTypePersonModify.jsp</result>
+            <result name="goBusiness" type="redirect">otherProvinceAction_loginCheck.action</result>
+            <result name="queryPage" type="redirect">threeTypePersonAction_queryPage.action</result>
+        </action>
+        
+        <!-- 企业拥有资质 -->
+		<action name="queryOtherCorpCertAction_*" class="com.tj.jst.outside.corpinto.otherProvince.queryOtherCorpCert.action.QueryOtherCorpCertAction" method="{1}">
+            <result name="goBusiness" type="redirect">otherProvinceAction_loginCheck.action</result>
+            <result name="queryPage">/WEB-INF/content/outside/corpinto/otherProvince/querycorpcert/list.jsp</result>
+            <result name="addPage">/WEB-INF/content/outside/corpinto/otherProvince/querycorpcert/corpCertAdd.jsp</result>
+        	<result name="query" type="redirect">queryOtherCorpCertAction_queryPage.action</result>
+        	<!-- 返回json类型数据 -->
+			<!-- result是action中设置的变量名，也是页面需要返回的数据，该变量必须有setter和getter方法 -->
+            <result name="success" type="json">
+			    <param name="root">result</param>
+			</result>
+        </action>
+
+		<!-- 外省三类人员查询 -->
+		<action name="threePersonAction_*" class="com.tj.jst.outside.staffmanage.threeTypePerson.action.ThreePersonAction" method="{1}">
+            <result name="threeTypePersonSuccess">/WEB-INF/content/outside/staffmanage/queryThreeTypePerson/queryThreeTypePersonList.jsp</result>
+            <result name="goBusiness" type="redirect">loginAction_businessPage.action</result>
+            <result name="queryPage" type="redirect">threePersonAction_queryPage.action</result>
+        	<result name="detailed">/WEB-INF/content/outside/staffmanage/queryThreeTypePerson/queryThreeTypePerson.jsp</result>
+        </action>
+        
+        <!-- 外省项目备案 -->
+    	<action name="otherProjectAction_*" class="com.tj.jst.outside.corpinto.otherProvince.project.action.OtherProjectAction" method="{1}">
+            <result name="otherProjectSuccess">/WEB-INF/content/outside/corpinto/otherProvince/project/projectList.jsp</result>
+            <result name="addPage">/WEB-INF/content/outside/corpinto/otherProvince/project/projectAdd.jsp</result>
+            <result name="modifyPage">/WEB-INF/content/outside/corpinto/otherProvince/project/projectModify.jsp</result>
+            <result name="goBusiness" type="redirect">otherProvinceAction_loginCheck.action</result>
+            <result name="queryPage" type="redirect">otherProjectAction_queryPage.action</result>
+        	<result name="queryAdd" type="redirect">otherProjectAction_modifyPage.action?otherPrjId=${otherPrjId}</result>
+        </action>
+        
+        <!-- 外省项目,人员备案 -->
+    	<action name="projectStaffAction_*" class="com.tj.jst.outside.corpinto.otherProvince.projectStaff.action.ProjectStaffAction" method="{1}">
+            <result name="goBusiness" type="redirect">otherProvinceAction_loginCheck.action</result>
+            <result name="queryAdd" type="redirect">projectStaffAction_queryById.action?otherPrjId=${otherPrjId}</result>
+        	<result name="queryProjectDetailed">/WEB-INF/content/outside/corpinto/otherProvince/project/staff/projectStaffDetailed.jsp</result>
+        	<result name="personDetailed">/WEB-INF/content/outside/corpinto/otherProvince/project/staff/staffDetailed.jsp</result>
+        
+        </action>
+        <!-- 弹出项目人员查询页面 -->
+    	<action name="queryPrjStaffAction_*" class="com.tj.jst.outside.corpinto.otherProvince.projectStaff.action.QueryPrjStaffAction" method="{1}">
+            <result name="queryPrjStaff">/WEB-INF/content/outside/corpinto/otherProvince/project/staff/getPrjStaffList.jsp</result>
+        </action>
+
+    </package>
+
+</struts>

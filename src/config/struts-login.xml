@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+    <package name="login" namespace="/" extends="default">
+    	
+    	<!-- 登陆 -->
+    	<action name="loginAction_*" class="com.tj.jst.login.action.LoginAction" method="{1}">
+            <result name="checkOne">/WEB-INF/content/checkOne.jsp</result>
+            <result name="businessPage">/WEB-INF/content/outside/business/business.jsp</result>
+            <result name="businessPage2">/WEB-INF/content/outside/business/business2.jsp</result>
+            <result name="login">/WEB-INF/content/login.jsp</result>
+            <result name="driveInstructions">/WEB-INF/content/driveInstructions.jsp</result>
+            <result name="deptPage">/WEB-INF/content/inner/index.jsp</result>
+            <result name="nameLogin">/WEB-INF/content/nameLogin.jsp</result>
+        </action>
+        
+    </package>
+
+</struts>

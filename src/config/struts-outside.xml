@@ -1,0 +1,695 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+    <package name="corp" namespace="/" extends="json-default,default">
+    	
+    	<!-- 企业 -->
+    	<action name="corpAction_*" class="com.tj.jst.outside.corpinto.notforeign.action.CorpAction" method="{1}">
+            <result name="flowchart">/WEB-INF/content/outside/corpinto/notforeign/flowChart.jsp</result>
+            <result name="queryCorpNamePage">/WEB-INF/content/outside/corpinto/notforeign/queryCorpCode.jsp</result>
+            <result name="queryCorpCodePage">/WEB-INF/content/outside/corpinto/notforeign/queryCorpTypeCode.jsp</result>
+            <result name="queryCorpTypeCode">/WEB-INF/content/outside/corpinto/notforeign/corpModifyType.jsp</result>
+            <result name="corpAdd">/WEB-INF/content/outside/corpinto/notforeign/corpAdd.jsp</result>
+            <result name="corpModify">/WEB-INF/content/outside/corpinto/notforeign/corpModify.jsp</result>
+            <result name="modifyCorp">/WEB-INF/content/outside/corpinto/notforeign/modifyCorp.jsp</result>
+            <result name="outLogin">/WEB-INF/content/login.jsp</result>
+            <result name="addCorp">/WEB-INF/content/login.jsp</result>
+            <result name="backToBusiness">/WEB-INF/content/outside/business/business.jsp</result>
+            <result name="showCodeCertificate">/WEB-INF/content/CodeCertificate.jsp</result>
+           <result name="goBusiness" type="redirect">loginAction_businessPage.action</result>
+            <!-- 返回json类型数据 -->
+			<!-- result是action中设置的变量名，也是页面需要返回的数据，该变量必须有setter和getter方法 -->
+            <result name="success" type="json">
+			    <param name="root">result</param>
+			</result>
+			<result name="oaeasPage">/WEB-INF/content/oaeasPage.jsp</result>
+			
+        </action>
+        
+        <!-- 企业拥有资质查询 -->
+        <action name="queryQualificationAction_*" class="com.tj.jst.outside.business.queryQualification.action.QueryQualificationAction" method="{1}">
+         	<result name="queryCorpCode">/WEB-INF/content/outside/business/queryQualification/queryCorpCode.jsp</result>
+         	<result name="queryPage">/WEB-INF/content/outside/business/queryQualification/list.jsp</result>
+        </action>
+        
+    </package>
+    
+    <!-- 人员管理 -->
+    <package name="staff" namespace="/" extends="default">
+    	
+    	<!-- 注册建造师 -->
+		<action name="constructorAction_*" class="com.tj.jst.outside.staffmanage.constructor.action.ConstructorAction" method="{1}">
+            <result name="constructorSuccess">/WEB-INF/content/outside/staffmanage/constructor/constructorList.jsp</result>
+			<result name="goBusiness" type="redirect">loginAction_businessPage.action</result>
+			<result name="detailed">/WEB-INF/content/outside/staffmanage/constructor/constructorDetailed.jsp</result>
+            <!-- <result name="goBusiness" type="redirect">loginAction_businessPage.action</result> -->
+			<result name="queryPage" type="redirect">constructorAction_queryPage.action</result>
+		</action>
+
+		<!-- 岗位人员 -->
+		<action name="positionsAction_*" class="com.tj.jst.outside.staffmanage.positions.action.PositionsAction" method="{1}">
+            <result name="positionsSuccess">/WEB-INF/content/outside/staffmanage/positions/positionsList.jsp</result>
+			<result name="goBusiness" type="redirect">loginAction_businessPage.action</result>
+		</action>
+
+        <!-- 注册技术工种 -->
+        <action name="skilledworkerAction_*" class="com.tj.jst.outside.staffmanage.skilledworker.action.SkilledworkerAction" method="{1}">
+            <result name="skillworkerSuccess">/WEB-INF/content/outside/staffmanage/skilledworker/skilledworkerList.jsp</result>
+            <result name="addPage">/WEB-INF/content/outside/staffmanage/skilledworker/skilledworkerAdd.jsp</result>
+            <result name="modifyPage">/WEB-INF/content/outside/staffmanage/skilledworker/skilledworkerModify.jsp</result>
+             <result name="goBusiness" type="redirect">loginAction_businessPage.action</result>
+            <result name="queryPage" type="redirect">skilledworkerAction_queryPage.action</result>
+        </action>
+
+        <!-- 职称人员 -->
+		<action name="titleAction_*" class="com.tj.jst.outside.staffmanage.title.action.TitleAction" method="{1}">
+            <result name="titleSuccess">/WEB-INF/content/outside/staffmanage/title/titleList.jsp</result>
+            <result name="addPage">/WEB-INF/content/outside/staffmanage/title/titleAdd.jsp</result>
+            <result name="modifyPage">/WEB-INF/content/outside/staffmanage/title/titleModify.jsp</result>
+            <result name="goBusiness" type="redirect">loginAction_businessPage.action</result>
+            <result name="queryPage" type="redirect">titleAction_queryPage.action</result>
+        </action>
+        
+        <!-- 企业拥有资质 -->
+		<action name="queryCorpCertAction_*" class="com.tj.jst.outside.business.querycorpcert.action.QueryCorpCertAction" method="{1}">
+            <result name="goBusiness" type="redirect">loginAction_businessPage.action</result>
+            <result name="queryPage">/WEB-INF/content/outside/business/querycorpcert/list.jsp</result>
+        </action>
+
+    </package>
+
+	<package name="fileUpload" namespace="/" extends="struts-default">
+        <action name="fileUpload_*" class="com.tj.jst.outside.business.upload.action.UploadAction" method="{1}">
+            <!-- 项目报建 -->
+            <result name="constructionSuccess" type="redirect">constructionAction_modifyPage.action?prjId=${id}</result>
+            <!-- 勘察申请 -->
+            <result name="surveySuccess" type="redirect">surveyAction_modifyPage.action?surveyId=${id}</result>
+        	<!-- 设计申请 -->
+        	<result name="designSuccess" type="redirect">designAction_modifyPage.action?designId=${id}</result>
+        	<!-- 勘察合同备案 -->
+        	<result name="surveyContractFiling" type="redirect">surveyContractFilingAction_modifyPage.action?recordId=${id}</result>
+        	<!-- 设计合同备案 -->
+        	<result name="designContractFiling" type="redirect">designContractFilingAction_modifyPage.action?recordId=${id}</result>
+        	<!-- 监理合同备案 -->
+        	<result name="supervisContractFiling" type="redirect">supervisorContractFilingAction_modifyPage.action?recordId=${id}</result>
+        	<!-- 市建合同备案 -->
+        	<result name="theContractorSuccess" type="redirect">theContractorAction_modifyPage.action?recordId=${id}</result>
+        	<!-- 发改合同备案 -->
+        	<result name="reformContractFiling" type="redirect">reformAction_modifyPage.action?recordId=${id}</result>
+        	<!-- 施工分包合同备案 -->
+        	<result name="subPackageContrFiling" type="redirect">subPackageAction_modifyPage.action?recordId=${id}</result>
+        	<!-- 施工劳务合同备案 -->
+        	<result name="labourContractFiling" type="redirect">labourServicesAction_modifyPage.action?recordId=${id}</result>
+        	<!-- 施工图审查 -->
+        	<result name="constructionPlansSuccess" type="redirect">constructionPlansAction_modifyPage.action?censorId=${id}</result>
+        	<!-- 现场安全审查 -->                       
+        	<result name="scenesafe" type="redirect">scenesafeAction_modifyPagee.action?permitid=${id}</result>
+        	<!-- 质量监督 -->
+        	<result name="qualitySuccess" type="redirect">qualityAction_modifyPage.action?qualityId=${id}</result>
+        	<!-- 安全监督 -->
+        	<result name="safetySuccess" type="redirect">safetyAction_modifyPage.action?safetyId=${id}</result>
+        	<!-- 施工许可 -->
+        	<result name="permitSuccess" type="redirect">permitAction_modifyPage.action?permitId=${id}</result>
+        	<!-- 竣工验收 -->
+        	<result name="completeSuccess" type="redirect">completeAction_modifyPage.action?completeId=${id}</result>
+        	<!-- 外省企业项目 -->
+        	<result name="OtherProjectSuccess" type="redirect">otherProjectAction_modifyPage.action?otherPrjId=${id}</result>
+       		<!-- 外省企业项目人员 -->
+        	<result name="prjPersonSuccess" type="redirect">projectStaffAction_personDetailed.action?personId=${id}</result>
+       		<!-- 项目报建(主管部门修改时使用) -->
+            <result name="constrSuccess" type="redirect">constrModifyAction_queryById.action?prjId=${id}</result>
+        </action>
+    </package>
+
+	<package name="business" namespace="/" extends="json-default,default">
+    	
+    	<!-- 企业项目报建 -->
+    	<action name="constructionAction_*" class="com.tj.jst.outside.business.construction.action.ConstructionAction" method="{1}">
+            <result name="queryPage">/WEB-INF/content/outside/business/construction/list.jsp</result>
+            <result name="addPage">/WEB-INF/content/outside/business/construction/add.jsp</result>
+            <result name="modifyPage">/WEB-INF/content/outside/business/construction/modify.jsp</result>
+            <result name="goBusiness" type="redirect">loginAction_businessPage.action</result>
+            <result name="queryAppDept">/WEB-INF/content/outside/business/construction/appDept.jsp</result>
+            <result name="query" type="redirect">constructionAction_queryPage.action</result>
+            <result name="queryAdd" type="redirect">constructionAction_modifyPage.action?prjId=${prjId}</result>
+            <!-- 返回json类型数据 -->
+			<!-- result是action中设置的变量名，也是页面需要返回的数据，该变量必须有setter和getter方法 -->
+            <result name="success" type="json">
+			    <param name="root">result</param>
+			</result>
+        </action>
+        
+        <!-- 审批单位 -->
+    	<action name="queryAppDept_*" class="com.tj.jst.inner.integrity.corpBadIntegrity.action.QueryCorpsAction" method="{1}">
+            <result name="queryPage">/WEB-INF/content/inner/integrity/corpBadIntegrity/getCorpList.jsp</result>
+            <!-- 返回json类型数据 -->
+			<!-- result是action中设置的变量名，也是页面需要返回的数据，该变量必须有setter和getter方法 -->
+            <result name="success" type="json">
+			    <param name="root">result</param>
+			</result>
+        </action>
+        
+        <!-- 设计 -->
+    	<action name="designAction_*" class="com.tj.jst.outside.business.design.action.DesignAction" method="{1}">
+            <result name="queryPage">/WEB-INF/content/outside/business/design/list.jsp</result>
+            <result name="addPage">/WEB-INF/content/outside/business/design/add.jsp</result>
+            <result name="modifyPage">/WEB-INF/content/outside/business/design/modify.jsp</result>
+           <result name="goBusiness" type="redirect">loginAction_businessPage.action</result>
+            <result name="queryAppDept">/WEB-INF/content/outside/business/design/appDept.jsp</result>
+            <result name="query" type="redirect">designAction_queryPage.action</result>
+            <result name="queryAdd" type="redirect">designAction_modifyPage.action?designId=${designId}</result>
+            <!-- 返回json类型数据 -->
+			<!-- result是action中设置的变量名，也是页面需要返回的数据，该变量必须有setter和getter方法 -->
+            <result name="success" type="json">
+			    <param name="root">result</param>
+			</result>
+        </action>
+        
+        <!-- 勘察 -->
+    	<action name="surveyAction_*" class="com.tj.jst.outside.business.survey.action.SurveyAction" method="{1}">
+            <result name="queryPage">/WEB-INF/content/outside/business/survey/list.jsp</result>
+            <result name="addPage">/WEB-INF/content/outside/business/survey/add.jsp</result>
+            <result name="modifyPage">/WEB-INF/content/outside/business/survey/modify.jsp</result>
+            <result name="goBusiness" type="redirect">loginAction_businessPage.action</result>
+            <result name="queryAppDept">/WEB-INF/content/outside/business/survey/appDept.jsp</result>
+            <result name="query" type="redirect">surveyAction_queryPage.action</result>
+            <result name="queryAdd" type="redirect">surveyAction_modifyPage.action?surveyId=${surveyId}</result>
+            <!-- 返回json类型数据 -->
+			<!-- result是action中设置的变量名，也是页面需要返回的数据，该变量必须有setter和getter方法 -->
+            <result name="success" type="json">
+			    <param name="root">result</param>
+			</result>
+        </action>
+        
+        <!-- 勘察、设计项目信息查询
+    	<action name="designSurveyPrjsAction_*" class="com.tj.jst.outside.business.survey.action.DesignSurveyPrjsAction" method="{1}">
+            <result name="queryPrjPage">/WEB-INF/content/outside/business/survey/getPrjList.jsp</result>
+        </action>
+         -->
+        
+        <!-- 勘察设计审图人员 -->
+    	<action name="designSurveyStaffAction_*" class="com.tj.jst.outside.business.designSurveyStaff.action.DesignSurveyStaffAction" method="{1}">
+            <result name="queryPage">/WEB-INF/content/outside/business/designSurveyStaff/list.jsp</result>
+            <result name="addPage">/WEB-INF/content/outside/business/designSurveyStaff/add.jsp</result>
+            <result name="modifyPage">/WEB-INF/content/outside/business/designSurveyStaff/modify.jsp</result>
+            <result name="goBusiness" type="redirect">loginAction_businessPage.action</result>
+            <result name="query" type="redirect">designSurveyStaffAction_queryPage.action</result>
+        </action>
+        
+		<!-- 施工图审查 -->
+    	<action name="constructionPlansAction_*" class="com.tj.jst.outside.business.constructionPlans.action.ConstructionPlansAction" method="{1}">
+            <result name="queryPage">/WEB-INF/content/outside/business/constructionPlans/list.jsp</result>
+            <result name="addPage">/WEB-INF/content/outside/business/constructionPlans/add.jsp</result>
+            <result name="modifyPage">/WEB-INF/content/outside/business/constructionPlans/modify.jsp</result>
+          	<result name="goBusiness" type="redirect">loginAction_businessPage.action</result>
+            <result name="queryAppDept">/WEB-INF/content/outside/business/constructionPlans/appDept.jsp</result>
+            <result name="query" type="redirect">constructionPlansAction_queryPage.action</result>
+            <result name="queryAdd" type="redirect">constructionPlansAction_modifyPage.action?censorId=${censorId}</result>
+            <!-- 返回json类型数据 -->
+			<!-- result是action中设置的变量名，也是页面需要返回的数据，该变量必须有setter和getter方法 -->
+            <result name="success" type="json">
+			    <param name="root">result</param>
+			</result>
+        </action>
+
+		<!-- 施工图审证书编号查询 -->
+    	<action name="queryPlanAction_*" class="com.tj.jst.outside.business.permit.action.QueryPlanAction" method="{1}">
+            <result name="queryPlanNum">/WEB-INF/content/outside/business/permit/getPlanList.jsp</result>
+        </action>
+
+		<!-- 安全监督 -->
+    	<action name="safetyAction_*" class="com.tj.jst.outside.business.safety.action.SafetyAction" method="{1}">
+            <result name="queryPage">/WEB-INF/content/outside/business/safety/list.jsp</result>
+            <result name="addPage">/WEB-INF/content/outside/business/safety/add.jsp</result>
+            <result name="modifyPage">/WEB-INF/content/outside/business/safety/modify.jsp</result>
+            <result name="goBusiness" type="redirect">loginAction_businessPage.action</result>
+            <result name="query" type="redirect">safetyAction_queryPage.action</result>
+            <result name="queryAdd" type="redirect">safetyAction_modifyPage.action?safetyId=${safetyId}</result>
+            <!-- 返回json类型数据 -->
+			<!-- result是action中设置的变量名，也是页面需要返回的数据，该变量必须有setter和getter方法 -->
+            <result name="success" type="json">
+			    <param name="root">result</param>
+			</result>
+        </action>
+        <!-- 施工安全从业人员 -->
+    	<action name="safetyStaffAction_*" class="com.tj.jst.outside.business.safety.action.SafetyStaffAction" method="{1}">
+            <result name="queryPage">/WEB-INF/content/outside/business/safetyStaff/list.jsp</result>
+            <result name="addPage">/WEB-INF/content/outside/business/safetyStaff/add.jsp</result>
+            <result name="modifyPage">/WEB-INF/content/outside/business/safetyStaff/modify.jsp</result>
+            <result name="goBusiness" type="redirect">loginAction_businessPage.action</result>
+            <result name="query" type="redirect">safetyStaffAction_queryPage.action</result>
+        </action>
+
+        
+        <!-- 勘察单位查询 -->
+    	<action name="QualitykcAction_*" class="com.tj.jst.outside.business.quality.action.QualitykcAction" method="{1}">
+        	<result name="queryPrjPagekc">/WEB-INF/content/outside/business/quality/getPrjListkc.jsp</result>
+        	<!-- 返回json类型数据 -->
+			<!-- result是action中设置的变量名，也是页面需要返回的数据，该变量必须有setter和getter方法 -->
+        	<result name="success" type="json">
+		    	<param name="root">result</param>
+			</result>
+        </action>
+        <!-- 设计单位查询 -->
+    	<action name="QualitySJAction_*" class="com.tj.jst.outside.business.quality.action.QualitySJAction" method="{1}">
+            <result name="queryPrjPagesj">/WEB-INF/content/outside/business/quality/getPrjListsj.jsp</result>
+        	<!-- 返回json类型数据 -->
+			<!-- result是action中设置的变量名，也是页面需要返回的数据，该变量必须有setter和getter方法 -->
+        	<result name="success" type="json">
+		    	<param name="root">result</param>
+			</result>
+        </action>
+        <!-- 总包单位查询 -->
+    	<action name="QualityzbAction_*" class="com.tj.jst.outside.business.quality.action.QualityzbAction" method="{1}">
+            <result name="queryPrjPagezb">/WEB-INF/content/outside/business/quality/getPrjListzb.jsp</result>
+        </action>
+        <!-- 专业分包单位查询 -->
+    	<action name="QualityfbAction_*" class="com.tj.jst.outside.business.quality.action.QualityfbAction" method="{1}">
+            <result name="queryPrjPagefb">/WEB-INF/content/outside/business/quality/getPrjListfb.jsp</result>
+        </action>
+         <!-- 劳务分包单位查询 -->
+    	<action name="QualitylwAction_*" class="com.tj.jst.outside.business.quality.action.QualitylwAction" method="{1}">
+            <result name="queryPrjPagelw">/WEB-INF/content/outside/business/quality/getPrjListlw.jsp</result>
+        </action>
+        <!-- 安全负责人查询信息 -->
+    	<action name="QualityanfzAction_*" class="com.tj.jst.outside.business.quality.action.QualityanfzAction" method="{1}">
+            <result name="queryPrjPageanfz">/WEB-INF/content/outside/business/quality/getPrjListanfz.jsp</result>
+        </action>
+        <!-- 项目负责人查询信息 -->
+    	<action name="QualityanxmfzAction_*" class="com.tj.jst.outside.business.quality.action.QualityanxmfzAction" method="{1}">
+            <result name="queryPrjPageanxmfz">/WEB-INF/content/outside/business/quality/getPrjListanxmfz.jsp</result>
+        </action>
+        <!-- 专职安全管理责人查询信息 -->
+    	<action name="QualityzzryAction_*" class="com.tj.jst.outside.business.quality.action.QualityzzryAction" method="{1}" >
+            <result name="queryPrjPagezzry">/WEB-INF/content/outside/business/quality/getPrjListanzzry.jsp</result>
+        </action>
+        <!--专业分包项目负责人查询信息 -->
+    	<action name="QualityfbfzrAction_*" class="com.tj.jst.outside.business.quality.action.QualityfbfzrAction" method="{1}" >
+            <result name="queryPrjPagefbfzr">/WEB-INF/content/outside/business/quality/getPrjListfbfzr.jsp</result>
+        </action>
+        <!-- 监理单位查询 -->
+    	<action name="QualityjlAction_*" class="com.tj.jst.outside.business.quality.action.QualityjlAction" method="{1}">
+            <result name="queryPrjPagesj">/WEB-INF/content/outside/business/quality/getPrjListjl.jsp</result>
+         <!-- 返回json类型数据 -->
+		<!-- result是action中设置的变量名，也是页面需要返回的数据，该变量必须有setter和getter方法 -->
+        <result name="success" type="json">
+		    <param name="root">result</param>
+		</result>
+        </action>
+        
+        <!-- 施工许可 -->
+    	<action name="permitAction_*" class="com.tj.jst.outside.business.permit.action.PermitAction" method="{1}">
+            <result name="queryPage">/WEB-INF/content/outside/business/permit/list.jsp</result>
+            <result name="addPage">/WEB-INF/content/outside/business/permit/add.jsp</result>
+            <result name="modifyPage">/WEB-INF/content/outside/business/permit/modify.jsp</result>
+           <result name="goBusiness" type="redirect">loginAction_businessPage.action</result>
+            <result name="query" type="redirect">permitAction_queryPage.action</result>
+            <result name="queryAdd" type="redirect">permitAction_modifyPage.action?permitId=${permitId}</result>
+            <!-- 返回json类型数据 -->
+			<!-- result是action中设置的变量名，也是页面需要返回的数据，该变量必须有setter和getter方法 -->
+            <result name="success" type="json">
+			    <param name="root">result</param>
+			</result>
+        </action>
+
+        <!-- 建筑企业统计报表 -->
+    	<action name="corpReportAction_*" class="com.tj.jst.outside.business.corpReport.action.CorpReportAction" method="{1}">
+            <result name="queryPage">/WEB-INF/content/outside/business/corpReport/list.jsp</result>
+            <result name="addPage">/WEB-INF/content/outside/business/corpReport/add.jsp</result>
+            <result name="modifyPage">/WEB-INF/content/outside/business/corpReport/modify.jsp</result>
+            <result name="goBusiness" type="redirect">loginAction_businessPage.action</result>
+            <result name="query" type="redirect">corpReportAction_queryPage.action</result>
+        </action>
+        
+         <!-- 企业诚信信息查询 -->
+    	<action name="queryCredAction_*" class="com.tj.jst.outside.business.credibility.action.queryCredAction" method="{1}">
+            <result name="queryPage">/WEB-INF/content/outside/business/credibility/credibilityList.jsp</result>
+             <result name="query">/WEB-INF/content/outside/business/credibility/list.jsp</result> 
+             <result name="queryPagee">/WEB-INF/content/outside/business/credibility/qylist.jsp</result>         
+           </action>
+           <!-- 企业良好信息查询 -->
+    	<action name="queryCredLhAction_*" class="com.tj.jst.outside.business.credibility.action.queryCredLhAction" method="{1}">
+            <result name="queryPage">/WEB-INF/content/outside/business/credibility/credibilityLhList.jsp</result>
+             <result name="queryPagee">/WEB-INF/content/outside/business/credibility/goodlist.jsp</result>         
+           </action>
+        
+           
+        <!-- 授权 -->
+    	<action name="authorizationAction_*" class="com.tj.jst.outside.business.authorization.action.AuthorizationAction" method="{1}">
+            <result name="queryPage">/WEB-INF/content/outside/business/authorization/list.jsp</result>
+            <result name="addPage">/WEB-INF/content/outside/business/authorization/add.jsp</result>
+            <result name="goBusiness" type="redirect">loginAction_businessPage.action</result>
+            <result name="query" type="redirect">authorizationAction_queryPage.action</result>
+        </action>
+        <!-- 授权项目信息查询 -->
+    	<action name="queryAuPrjsAction_*" class="com.tj.jst.outside.business.authorization.action.QueryAuPrjsAction" method="{1}">
+            <result name="queryAuPrjPage">/WEB-INF/content/outside/business/authorization/getPrjList.jsp</result>
+        </action>
+        <!-- 授权企业信息查询 -->
+    	<action name="queryAuCorpAction_*" class="com.tj.jst.outside.business.authorization.action.QueryAuCorpAction" method="{1}">
+            <result name="queryAuPrjPage">/WEB-INF/content/outside/business/authorization/getCorpList.jsp</result>
+        </action>
+        <!-- 招投标信息 -->
+        <action name="tenderInfoAction_*" class="com.tj.jst.outside.business.tenderInfo.action.TenderInfoAction" method="{1}">
+            <result  name="queryPage">/WEB-INF/content/outside/business/tenderInfo/list.jsp</result>
+            <result name="queryById">/WEB-INF/content/outside/business/tenderInfo/modify.jsp</result>
+            <result name="addPage">/WEB-INF/content/outside/business/tenderInfo/add.jsp</result>
+            <result name="add" type="redirect">tenderInfoAction_addPage.action?message=${message}</result>
+            <result name="goBusiness" type="redirect">loginAction_businessPage.action</result>
+            <result name="query" type="redirect">tenderInfoAction_queryPage.action</result>
+        </action>
+    </package>
+
+
+
+
+
+
+
+
+
+	<package name="contractFiling" namespace="/" extends="json-default,default">
+		
+		<!-- 跳转 勘察合同备案、设计合同备案、监理合同备案、施工合同备案 页面 -->
+    	<action name="filingIndexContractFilingAction_*" class="com.tj.jst.outside.business.contractFiling.action.FilingIndexContractFilingAction" method="{1}">
+            <result name="filingIndex">/WEB-INF/content/outside/business/contractFiling/filingIndex.jsp</result>
+            <result name="constructionFiling">/WEB-INF/content/outside/business/contractFiling/constructionFiling.jsp</result>
+        </action>
+
+		<!-- 施工合同word -->
+    	<action name="fileWorldAction_*" class="com.tj.jst.outside.business.constructionFiling.fileWorld.action.FileWorldAction" method="{1}">
+            <result name="fileWorldPage">/WEB-INF/content/outside/business/contractFiling/constructionFiling/fileWorld.jsp</result>
+            <result name="reformFileWorld">/WEB-INF/content/outside/business/contractFiling/constructionFiling/reformFileWorld.jsp</result>
+            <result name="subPackageFileWorld">/WEB-INF/content/outside/business/contractFiling/constructionFiling/subPackageFileWorld.jsp</result>
+            <result name="labourServicesFileWorld">/WEB-INF/content/outside/business/contractFiling/constructionFiling/labourServicesFileWorld.jsp</result>
+            <result name="viewDetails">/WEB-INF/content/outside/business/contractFiling/constructionFiling/viewDetails.jsp</result>
+            
+            
+            <result name="queryConMessage">/WEB-INF/content/outside/business/contractFiling/constructionFiling/queryConMessage.jsp</result>
+            <result name="query" type="redirect">fileWorldAction_fileWorldPage.action?recordId=${recordId}&amp;conType=${conType}</result>
+            <result name="queryTheContractor" type="redirect">theContractorAction_queryPage.action</result>
+            <result name="queryReform" type="redirect">reformAction_queryPage.action</result>
+            <result name="querySubPackage" type="redirect">subPackageAction_queryPage.action</result>
+            <result name="queryLabourServices" type="redirect">labourServicesAction_queryPage.action</result>
+        </action>
+		
+		<!-- 勘察合同备案 -->
+    	<action name="surveyContractFilingAction_*" class="com.tj.jst.outside.business.contractFiling.action.SurveyContractFilingAction" method="{1}">
+            <result name="queryPage">/WEB-INF/content/outside/business/contractFiling/surveyContractFiling/list.jsp</result>
+            <result name="addPage">/WEB-INF/content/outside/business/contractFiling/surveyContractFiling/add.jsp</result>
+            <result name="modifyPage">/WEB-INF/content/outside/business/contractFiling/surveyContractFiling/modify.jsp</result>
+            <result name="goBusiness" type="redirect">loginAction_businessPage.action</result>
+            <result name="queryAppDept">/WEB-INF/content/outside/business/contractFiling/surveyContractFiling/appDept.jsp</result>
+            <result name="query" type="redirect">surveyContractFilingAction_queryPage.action</result>
+            <result name="queryAdd" type="redirect">surveyContractFilingAction_modifyPage.action?recordId=${recordId}</result>
+            <!-- 返回json类型数据 -->
+			<!-- result是action中设置的变量名，也是页面需要返回的数据，该变量必须有setter和getter方法 -->
+            <result name="success" type="json">
+			    <param name="root">result</param>
+			</result>
+        </action>
+		
+		<!-- 设计合同备案 -->
+    	<action name="designContractFilingAction_*" class="com.tj.jst.outside.business.contractFiling.action.DesignContractFilingAction" method="{1}">
+            <result name="queryPage">/WEB-INF/content/outside/business/contractFiling/designContractFiling/list.jsp</result>
+            <result name="addPage">/WEB-INF/content/outside/business/contractFiling/designContractFiling/add.jsp</result>
+            <result name="modifyPage">/WEB-INF/content/outside/business/contractFiling/designContractFiling/modify.jsp</result>
+            <result name="goBusiness" type="redirect">loginAction_businessPage.action</result>
+            <result name="queryAppDept">/WEB-INF/content/outside/business/contractFiling/designContractFiling/appDept.jsp</result>
+            <result name="query" type="redirect">designContractFilingAction_queryPage.action</result>
+            <result name="queryAdd" type="redirect">designContractFilingAction_modifyPage.action?recordId=${recordId}</result>
+            <!-- 返回json类型数据 -->
+			<!-- result是action中设置的变量名，也是页面需要返回的数据，该变量必须有setter和getter方法 -->
+            <result name="success" type="json">
+			    <param name="root">result</param>
+			</result>
+        </action>
+        
+        <!-- 监理合同备案 -->
+    	<action name="supervisorContractFilingAction_*" class="com.tj.jst.outside.business.contractFiling.action.SupervisorContractFilingAction" method="{1}">
+            <result name="queryPage">/WEB-INF/content/outside/business/contractFiling/supervisorContractFiling/list.jsp</result>
+            <result name="addPage">/WEB-INF/content/outside/business/contractFiling/supervisorContractFiling/add.jsp</result>
+            <result name="modifyPage">/WEB-INF/content/outside/business/contractFiling/supervisorContractFiling/modify.jsp</result>
+            <result name="goBusiness" type="redirect">loginAction_businessPage.action</result>
+            <result name="queryAppDept">/WEB-INF/content/outside/business/contractFiling/supervisorContractFiling/appDept.jsp</result>
+            <result name="query" type="redirect">supervisorContractFilingAction_queryPage.action</result>
+            <result name="queryAdd" type="redirect">supervisorContractFilingAction_modifyPage.action?recordId=${recordId}</result>
+            <!-- 返回json类型数据 -->
+			<!-- result是action中设置的变量名，也是页面需要返回的数据，该变量必须有setter和getter方法 -->
+            <result name="success" type="json">
+			    <param name="root">result</param>
+			</result>
+        </action>
+        
+        <!-- 市建施工总包合同备案 -->
+    	<action name="theContractorAction_*" class="com.tj.jst.outside.business.constructionFiling.mainContractor.action.TheContractorAction" method="{1}">
+            <result name="queryPage">/WEB-INF/content/outside/business/contractFiling/constructionFiling/theContractor/list.jsp</result>
+            <result name="addPage">/WEB-INF/content/outside/business/contractFiling/constructionFiling/theContractor/add.jsp</result>
+            <result name="modifyPage">/WEB-INF/content/outside/business/contractFiling/constructionFiling/theContractor/modify.jsp</result>
+            <result name="goBusiness">/WEB-INF/content/outside/business/business.jsp</result>
+            <result name="queryAppDept">/WEB-INF/content/outside/business/contractFiling/supervisorContractFiling/appDept.jsp</result>
+            <result name="query" type="redirect">theContractorAction_queryPage.action</result>
+            <result name="queryAdd" type="redirect">theContractorAction_modifyPage.action?recordId=${recordId}</result>
+            <!-- 返回json类型数据 -->
+			<!-- result是action中设置的变量名，也是页面需要返回的数据，该变量必须有setter和getter方法 -->
+            <result name="success" type="json">
+			    <param name="root">result</param>
+			</result>
+        </action>
+        <!-- 发改法规施工总包合同备案 -->
+    	<action name="reformAction_*" class="com.tj.jst.outside.business.constructionFiling.mainContractor.action.ReformAction" method="{1}">
+            <result name="queryPage">/WEB-INF/content/outside/business/contractFiling/constructionFiling/reform/list.jsp</result>
+            <result name="addPage">/WEB-INF/content/outside/business/contractFiling/constructionFiling/reform/add.jsp</result>
+            <result name="modifyPage">/WEB-INF/content/outside/business/contractFiling/constructionFiling/reform/modify.jsp</result>
+            <result name="goBusiness">/WEB-INF/content/outside/business/business.jsp</result>
+            <result name="queryAppDept">/WEB-INF/content/outside/business/contractFiling/supervisorContractFiling/appDept.jsp</result>
+            <result name="query" type="redirect">reformAction_queryPage.action</result>
+            <result name="queryAdd" type="redirect">reformAction_modifyPage.action?recordId=${recordId}</result>
+            <!-- 返回json类型数据 -->
+			<!-- result是action中设置的变量名，也是页面需要返回的数据，该变量必须有setter和getter方法 -->
+            <result name="success" type="json">
+			    <param name="root">result</param>
+			</result>
+        </action>
+        
+        <!-- 施工分包合同备案 -->
+    	<action name="subPackageAction_*" class="com.tj.jst.outside.business.constructionFiling.subPackage.action.SubPackageAction" method="{1}">
+            <result name="queryPage">/WEB-INF/content/outside/business/contractFiling/constructionFiling/subPackage/list.jsp</result>
+            <result name="addPage">/WEB-INF/content/outside/business/contractFiling/constructionFiling/subPackage/add.jsp</result>
+            <result name="modifyPage">/WEB-INF/content/outside/business/contractFiling/constructionFiling/subPackage/modify.jsp</result>
+            <result name="goBusiness">/WEB-INF/content/outside/business/business.jsp</result>
+            <result name="queryAppDept">/WEB-INF/content/outside/business/contractFiling/supervisorContractFiling/appDept.jsp</result>
+            <result name="query" type="redirect">subPackageAction_queryPage.action</result>
+            <result name="queryAdd" type="redirect">subPackageAction_modifyPage.action?recordId=${recordId}</result>
+            <!-- 返回json类型数据 -->
+			<!-- result是action中设置的变量名，也是页面需要返回的数据，该变量必须有setter和getter方法 -->
+            <result name="success" type="json">
+			    <param name="root">result</param>
+			</result>
+        </action>
+
+		<!-- 施工劳务合同备案 -->
+    	<action name="labourServicesAction_*" class="com.tj.jst.outside.business.constructionFiling.labourServices.action.LabourServicesAction" method="{1}">
+            <result name="queryPage">/WEB-INF/content/outside/business/contractFiling/constructionFiling/labourServices/list.jsp</result>
+            <result name="addPage">/WEB-INF/content/outside/business/contractFiling/constructionFiling/labourServices/add.jsp</result>
+            <result name="modifyPage">/WEB-INF/content/outside/business/contractFiling/constructionFiling/labourServices/modify.jsp</result>
+            <result name="goBusiness">/WEB-INF/content/outside/business/business.jsp</result>
+            <result name="queryAppDept">/WEB-INF/content/outside/business/contractFiling/supervisorContractFiling/appDept.jsp</result>
+            <result name="query" type="redirect">labourServicesAction_queryPage.action</result>
+            <result name="queryAdd" type="redirect">labourServicesAction_modifyPage.action?recordId=${recordId}</result>
+            <!-- 返回json类型数据 -->
+			<!-- result是action中设置的变量名，也是页面需要返回的数据，该变量必须有setter和getter方法 -->
+            <result name="success" type="json">
+			    <param name="root">result</param>
+			</result>
+        </action>
+        
+        
+        <!-- 施工总包合同备案查询招投标关联 -->
+    	<action name="mainContractorAction_*" class="com.tj.jst.outside.business.constructionFiling.subPackage.action.MainContractorAction" method="{1}">
+            <result name="mainContractor">/WEB-INF/content/outside/business/contractFiling/constructionFiling/mainContractorList.jsp</result>
+        </action>
+        
+        <!-- 施工总包合同备案查询招投标关联 -->
+    	<action name="theContractorTenderInfoAction_*" class="com.tj.jst.outside.business.constructionFiling.mainContractor.action.TheContractorTenderInfoAction" method="{1}">
+            <result name="queryTenderInfo">/WEB-INF/content/outside/business/contractFiling/constructionFiling/theContractorList.jsp</result>
+        </action>
+        <!-- 查询施工总包企业设计资质 -->
+    	<action name="theContractorTitleLeveAction_*" class="com.tj.jst.outside.business.constructionFiling.mainContractor.action.TheContractorTitleLeveAction" method="{1}">
+            <result name="theTitleLeve">/WEB-INF/content/outside/business/contractFiling/constructionFiling/theContractorTitleLeveList.jsp</result>
+        </action>
+        
+        
+        <!-- 项目信息查询 -->
+    	<action name="queryPrjsAction_*" class="com.tj.jst.outside.business.contractFiling.action.QueryPrjsAction" method="{1}">
+            <result name="queryPrjPage">/WEB-INF/content/outside/business/contractFiling/getPrjList.jsp</result>
+        </action>
+        
+        
+         <!-- -->
+    	<action name="contractCorpQualAction_*" class="com.tj.jst.outside.business.quality.action.ContractCorpQualAction" method="{1}">
+            <result name="queryContractCorpQualA">/WEB-INF/content/outside/business/quality/ContractCorpQualA.jsp</result>
+            <result name="queryContractCorpQualB">/WEB-INF/content/outside/business/quality/ContractCorpQualB.jsp</result>
+            <result name="queryContractCorpQualC">/WEB-INF/content/outside/business/quality/ContractCorpQualC.jsp</result>
+            <result name="queryContractCorpQualD">/WEB-INF/content/outside/business/quality/ContractCorpQualD.jsp</result>
+        </action>
+        
+       <!-- -->
+    	<action name="contractRecordAction_*" class="com.tj.jst.outside.business.quality.action.ContractRecordAction" method="{1}">
+            <result name="queryContractRecord">/WEB-INF/content/outside/business/quality/ContractRecord.jsp</result>
+        </action>
+        
+        <!-- 勘察合同备案查询招投标关联 -->
+    	<action name="surveyTenderInfoAction_*" class="com.tj.jst.outside.business.contractFiling.action.SurveyTenderInfoAction" method="{1}">
+            <result name="queryTenderInfo">/WEB-INF/content/outside/business/contractFiling/getSurveyList.jsp</result>
+        </action>
+        
+        <!-- 设计合同备案查询招投标关联 -->
+    	<action name="designTenderInfoAction_*" class="com.tj.jst.outside.business.contractFiling.action.DesignTenderInfoAction" method="{1}">
+            <result name="queryTenderInfo">/WEB-INF/content/outside/business/contractFiling/getDesignList.jsp</result>
+        </action>
+        
+        <!-- 监理合同备案查询招投标关联 -->
+    	<action name="supervisorTenderInfoAction_*" class="com.tj.jst.outside.business.contractFiling.action.SupervisorTenderInfoAction" method="{1}">
+            <result name="queryTenderInfo">/WEB-INF/content/outside/business/contractFiling/getSupervisorList.jsp</result>
+        </action>
+        
+       	<!-- 查询企业监理资质 -->
+    	<action name="querySupervisorTitleLeveAction_*" class="com.tj.jst.outside.business.contractFiling.action.QuerySupervisorTitleLeveAction" method="{1}">
+            <result name="supervisorTitleLeve">/WEB-INF/content/outside/business/contractFiling/getSupervisorTitleLeveList.jsp</result>
+        </action>
+        <!-- 查询企业勘察资质 -->
+    	<action name="querySurveyTitleLeveAction_*" class="com.tj.jst.outside.business.contractFiling.action.QuerySurveyTitleLeveAction" method="{1}">
+            <result name="surveyTitleLeve">/WEB-INF/content/outside/business/contractFiling/getSurveyTitleLeveList.jsp</result>
+        </action>
+        <!-- 查询企业设计资质 -->
+    	<action name="queryDesignTitleLeveAction_*" class="com.tj.jst.outside.business.contractFiling.action.QueryDesignTitleLeveAction" method="{1}">
+            <result name="designTitleLeve">/WEB-INF/content/outside/business/contractFiling/getDesignTitleLeveList.jsp</result>
+        </action>
+    </package>    
+	    
+	    
+	    
+	    
+	    
+	<!-- 质量 -->
+	<package name="quality" namespace="/" extends="json-default,default">	    
+	    <!-- 质量监督 -->
+	   	<action name="qualityAction_*" class="com.tj.jst.outside.business.quality.action.QualityAction" method="{1}">
+	        <result name="queryPage">/WEB-INF/content/outside/business/quality/list.jsp</result>
+	        <result name="addPage">/WEB-INF/content/outside/business/quality/add.jsp</result>
+	        <result name="modifyPage">/WEB-INF/content/outside/business/quality/modify.jsp</result>
+	        <result name="goBusiness" type="redirect">loginAction_businessPage.action</result>
+	        <result name="query" type="redirect">qualityAction_queryPage.action</result>
+	        <result name="queryAdd" type="redirect">qualityAction_modifyPage.action?qualityId=${qualityId}</result>
+	        <!-- 返回json类型数据 -->
+			<!-- result是action中设置的变量名，也是页面需要返回的数据，该变量必须有setter和getter方法 -->
+			<result name="success" type="json">
+			    <param name="root">result</param>
+			</result>
+	    </action>
+	    
+	    <!-- 质量目信息查询 -->
+    	<action name="qualityPrjsAction_*" class="com.tj.jst.outside.business.quality.action.QualityPrjsAction" method="{1}">
+            <result name="queryPrjPage">/WEB-INF/content/outside/business/quality/getPrjList.jsp</result>
+         	<result name="queryPageModify">/WEB-INF/content/outside/business/safety/getprjLlismodify.jsp</result>
+         	<result name="querySafetyPage">/WEB-INF/content/outside/business/safety/getPrjList.jsp</result>
+         	
+         	
+         	<!-- 返回json类型数据 -->
+			<!-- result是action中设置的变量名，也是页面需要返回的数据，该变量必须有setter和getter方法 -->
+        	<result name="success" type="json">
+		    <param name="root">result</param>
+			</result>
+        </action>
+	   	<!-- 质量关联合同备案 
+    	<action name="contractFilingQualityAction_*" class="com.tj.jst.outside.business.quality.action.ContractFilingQualityAction" method="{1}">
+            <result name="contractFilingQuality">/WEB-INF/content/outside/business/quality/getContractFilingQualityList.jsp</result>
+        </action>-->
+        <!-- 质量施工图审信息查询 -->
+    	<action name="qualityPlansAction_*" class="com.tj.jst.outside.business.quality.action.QualityPlansAction" method="{1}">
+            <result name="qualityPlans">/WEB-INF/content/outside/business/quality/getPlans.jsp</result>
+         	<!-- 返回json类型数据 -->
+			<!-- result是action中设置的变量名，也是页面需要返回的数据，该变量必须有setter和getter方法 -->
+        	<result name="success" type="json">
+		    <param name="root">result</param>
+			</result>
+        </action>
+	</package>
+    
+
+	<package name="permit" namespace="/" extends="json-default,default">
+	
+		<!-- 施工许可 -->
+    	<action name="permitAction_*" class="com.tj.jst.outside.business.permit.action.PermitAction" method="{1}">
+            <result name="queryPage">/WEB-INF/content/outside/business/permit/list.jsp</result>
+            <result name="addPage">/WEB-INF/content/outside/business/permit/add.jsp</result>
+            <result name="modifyPage">/WEB-INF/content/outside/business/permit/modify.jsp</result>
+           <result name="goBusiness" type="redirect">loginAction_businessPage.action</result>
+            <result name="query" type="redirect">permitAction_queryPage.action</result>
+            <result name="queryAdd" type="redirect">permitAction_modifyPage.action?permitId=${permitId}</result>
+            <!-- 返回json类型数据 -->
+			<!-- result是action中设置的变量名，也是页面需要返回的数据，该变量必须有setter和getter方法 -->
+            <result name="success" type="json">
+			    <param name="root">result</param>
+			</result>
+        </action>
+        <!-- 施工许可项目信息查询 -->
+    	<action name="queryPermPrjsAction_*" class="com.tj.jst.outside.business.permit.action.QueryPermPrjsAction" method="{1}">
+            <result name="queryPrjPage">/WEB-INF/content/outside/business/permit/getPrjList.jsp</result>
+        </action>
+        <!-- 施工许可质量信息查询 -->
+		<action name="queryPermQualityAction_*" class="com.tj.jst.outside.business.permit.action.QueryPermQualityAction" method="{1}">
+            <result name="queryPermQuality">/WEB-INF/content/outside/business/permit/getPermQuality.jsp</result>
+        </action>
+        <!-- 施工许可安全信息查询 -->
+		<action name="queryPermSafetyAction_*" class="com.tj.jst.outside.business.permit.action.QueryPermSafetyAction" method="{1}">
+            <result name="queryPermSafety">/WEB-INF/content/outside/business/permit/getPermSafety.jsp</result>
+        </action>
+    </package>
+
+	<package name="complete" namespace="/" extends="json-default,default">    
+        <!-- 竣工验收 -->
+    	<action name="completeAction_*" class="com.tj.jst.outside.business.complete.action.CompleteAction" method="{1}">
+            <result name="queryPage">/WEB-INF/content/outside/business/complete/list.jsp</result>
+            <result name="addPage">/WEB-INF/content/outside/business/complete/add.jsp</result>
+            <result name="modifyPage">/WEB-INF/content/outside/business/complete/modify.jsp</result>
+            <result name="goBusiness" type="redirect">loginAction_businessPage.action</result>
+            <result name="query" type="redirect">completeAction_queryPage.action</result>
+            <result name="queryAdd" type="redirect">completeAction_modifyPage.action?completeId=${completeId}</result>
+            <!-- 返回json类型数据 -->
+			<!-- result是action中设置的变量名，也是页面需要返回的数据，该变量必须有setter和getter方法 -->
+            <result name="success" type="json">
+			    <param name="root">result</param>
+			</result>
+        </action>
+        <!-- 竣工验收项目信息查询 -->
+    	<action name="queryCompletePrjsAction_*" class="com.tj.jst.outside.business.complete.action.QueryCompletePrjsAction" method="{1}">
+            <result name="queryPrjPage">/WEB-INF/content/outside/business/complete/getPrjList.jsp</result>
+        </action>
+        
+        <!-- 竣工验收施工许可信息查询 -->
+    	<action name="completePermitInfoAction_*" class="com.tj.jst.outside.business.complete.action.CompletePermitInfoAction" method="{1}">
+            <result name="completePermit">/WEB-INF/content/outside/business/complete/getCompletePermit.jsp</result>
+        </action>
+	</package>
+	
+	<package name="singleProject" namespace="/" extends="json-default,default">    
+        <!-- 单体工程 -->
+    	<action name="singleProjectAction_*" class="com.tj.jst.outside.business.singleProject.action.SingleProjectAction" method="{1}">
+            <result name="queryPage">/WEB-INF/content/outside/business/singleProject/list.jsp</result>
+            <result name="addPage">/WEB-INF/content/outside/business/singleProject/add.jsp</result>
+            <result name="modifyPage">/WEB-INF/content/outside/business/singleProject/modify.jsp</result>
+            <result name="query" type="redirect">singleProjectAction_queryPage.action?prjId=${prjId}&amp;linkName=${linkName}&amp;prjNum=${prjNum}&amp;message=${message}</result>
+            <!-- 返回json类型数据 -->
+			<!-- result是action中设置的变量名，也是页面需要返回的数据，该变量必须有setter和getter方法 -->
+            <result name="success" type="json">
+			    <param name="root">result</param>
+			</result>
+        </action>
+	</package>
+</struts>
