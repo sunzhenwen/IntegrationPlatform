@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+	<!-- 设置Struts2动态调用action方法,老版本默认为true,新版本默认为false,需手动设置 -->
+    <constant name="struts.enable.DynamicMethodInvocation" value="false" />
+    <!-- 设置Struts2应用是否处于开发模式，通常在开发调试阶段设为true,正式上线后可设为false -->
+    <constant name="struts.devMode" value="false" />
+    <!-- 设置上传问价大小为20M -->
+	<constant name="struts.multipart.maxSize" value="20971520"/> 
+    <package name="default" namespace="/" extends="struts-default">
+
+		<interceptors>
+            <interceptor name="loginInterceptor" class="com.tj.jst.base.interceptor.LoginInterceptor">
+            </interceptor>
+            <!-- 定义拦截器栈 -->
+            <interceptor-stack name="loginInterceptor-stack">
+                <interceptor-ref name="loginInterceptor"></interceptor-ref>
+                <interceptor-ref name="defaultStack"></interceptor-ref>
+            </interceptor-stack>
+        </interceptors>
+        <!-- 从新定义默认的拦截器栈，所有action中都将调用从新定义后的拦截器栈 -->
+        <default-interceptor-ref name="loginInterceptor-stack" />
+		
+        <!-- 指定默认action为actionError,当别人访问这个action的时候，如果找不到对应的action默认就用这个action了 -->
+		<default-action-ref name="actionError"/>
+
+ 		<!-- 全局异常处理 -->
+		<global-results>
+			<result name="login">/WEB-INF/content/login.jsp</result>
+			<result name="errors">/WEB-INF/content/error.jsp</result>
+			<result name="error">/WEB-INF/content/error.jsp</result>
+			<result name="exception">/WEB-INF/content/error.jsp</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping result="error" exception="com.tj.jst.base.exception.BaseException"/>
+			<exception-mapping result="exception" name="exception" exception="java.lang.Exception" />
+		</global-exception-mappings>
+		<action name="actionError" class="com.tj.jst.base.action.BaseAction">
+			<result>/WEB-INF/content/error.jsp</result>
+		</action>
+    </package>
+    
+    
+
+    <package name="business" namespace="/"  extends="json-default,default">    	
+		<action name="codeCertificateAction_*" class="com.tj.jst.base.action.CodeCertificateAction" method="{1}">
+            <result name="showCodeCertificate">/WEB-INF/content/CodeCertificate.jsp</result>
+        </action>     
+    </package>
+    
+
+	<!-- 引用模块配置文件 -->
+    <include file="config/struts-*.xml"/>
+</struts>
