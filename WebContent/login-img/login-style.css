@@ -1,0 +1,43 @@
+html,body,div,ul,li,ol,p,form,input,span,a,img,h1,h2,h3,h4,del,dl,dd,dt,textarea,label,fieldset{margin:0px auto;	padding:0px;}
+
+html,body{  font-family:"Microsoft YaHei"; font-size:14px; height:100%; color:#666; background:url(bg.jpg) repeat-x top center #fff;}
+
+ul,li,dt,dd{list-style:none; vertical-align:middle;}
+
+img{border:none;vertical-align:top;}
+
+a{text-decoration:none; color:#333;}
+a:hover{text-decoration:underline; color:#ff5400;}
+
+.fl{ float:left;}
+.fr{ float:right;}
+
+.hide{display:none}
+
+.warp{ width:100%; height:680px; overflow:hidden; background:url(bgm.png) no-repeat top center;}
+
+.logo{ margin:100px auto; width:100%; height:auto; overflow:hidden; text-align:center; }
+
+.w800{ width:800px; height:auto; overflow:hidden;}
+
+
+.login{ margin-top:0px; padding:5px 0; width:421px; height:295px; overflow:hidden; background:url(dlbg.png) no-repeat left top;}
+.login ul{ margin-top:6px; width:421px; height:auto;  overflow:hidden; text-align:center; height:auto; line-height:40px;  color:#ffffff; font-family:"Î¢ÈíÑÅºÚ"; font-size:21px; }
+.login li{ margin-bottom:20px; width:100%; height:40px; overflow:hidden;
+background-color:#006cd4;border:1px solid #4fa1e6;}
+.login li a{color:#ffffff; }
+.login li a:hover{color:#7aff00; text-decoration:none;}
+
+
+.bot{ width:100%; height:auto; overflow:hidden; text-align:center; color:#a3bbd0; }
+
+
+.login-qy{ margin-top:40px; padding:5px 0; width:311px; height:255px; overflow:hidden; background:url(dlbg.png) no-repeat left top;}
+.login-qy span{ display:block; margin:auto; width:311px;text-align:center; height:auto; line-height:30px; overflow:hidden; color:#ffffff; font-family:"Î¢ÈíÑÅºÚ"; font-size:21px;  }
+.login-qy ul{ margin-top:20px; width:268px; height:auto;  overflow:hidden;  }
+.login-qy li{ margin-top:10px; width:100%; height:auto; overflow:hidden;}
+.user,.pass{ width:256px; height:28px; line-height:28px; border:#cecece 1px solid;padding:5px; }
+.fxk{ float:left; margin-right:10px; width:14px; height:14px;  border:#cecece 1px solid;  }
+.dlbtn-qy{ width:268px; height:40px; background:url(dlbtn-qy.gif) no-repeat left top; border:0;}
+input{paddint:5px 0;}
+
