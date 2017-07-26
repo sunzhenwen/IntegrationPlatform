@@ -1,0 +1,114 @@
+package com.tj.jst.outside.business.contractFiling.condition;
+
+import com.tj.jst.base.page.Condition;
+
+/**
+ * 查询企业勘察资质
+ * @author Administrator
+ *
+ */
+public class QuerySurveyTitleLeveCondition extends Condition {
+
+	//项目编号
+	private String prjNum;
+	//项目名称
+	private String prjName;
+	//企业名称
+	private String corpName;
+	//组织机构代码
+	private String corpCode;
+	//中标单位组织机构代码
+	private String tenderCorpCode;
+	
+	public QuerySurveyTitleLeveCondition()
+	{
+		
+	}
+
+	
+	//查询语句
+	@Override
+	public String getInitialSql() {
+		//设置排序
+		//this.setOrderByItem(" createDate desc ");
+		
+		//查询当前可用单位；
+		StringBuffer sb=new StringBuffer(" where qualificationstypename='工程勘察' and corpCode='"+this.getTenderCorpCode()+"' ");
+		
+		if(prjName!= null && !"".equals(prjName)){
+			sb.append(" and prjName like '%"+prjName.trim()+"%'"); 
+		}
+		if(corpName!= null && !"".equals(corpName)){
+			sb.append(" and corpName like '%"+corpName.trim()+"%'"); 
+		}
+		String sql = "select * from v_survey_certdeail "+sb.toString();
+		return sql;
+	}
+
+	//查询数量
+	@Override
+	public String getCountSql() {
+		//查询当前可用单位；
+		
+		StringBuffer sb=new StringBuffer(" where qualificationstypename='工程勘察' and corpCode='"+this.getTenderCorpCode()+"' ");
+		if(prjName!= null && !"".equals(prjName)){
+			sb.append(" and prjName like '%"+prjName.trim()+"%'"); 
+		}
+		if(corpName!= null && !"".equals(corpName)){
+			sb.append(" and corpName like '%"+corpName.trim()+"%'"); 
+		}
+		String sqlCount="select count(*) from v_survey_certdeail "+sb.toString();
+		return sqlCount;
+	}
+
+
+	public String getPrjNum() {
+		return prjNum;
+	}
+
+
+	public void setPrjNum(String prjNum) {
+		this.prjNum = prjNum;
+	}
+
+
+	public String getPrjName() {
+		return prjName;
+	}
+
+
+	public void setPrjName(String prjName) {
+		this.prjName = prjName;
+	}
+
+
+	public String getCorpCode() {
+		return corpCode;
+	}
+
+
+	public void setCorpCode(String corpCode) {
+		this.corpCode = corpCode;
+	}
+
+
+	public String getTenderCorpCode() {
+		return tenderCorpCode;
+	}
+
+
+	public void setTenderCorpCode(String tenderCorpCode) {
+		this.tenderCorpCode = tenderCorpCode;
+	}
+
+
+	public String getCorpName() {
+		return corpName;
+	}
+
+
+	public void setCorpName(String corpName) {
+		this.corpName = corpName;
+	}
+
+}
